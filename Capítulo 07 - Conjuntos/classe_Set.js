@@ -97,7 +97,51 @@ export class Set {
         return differenceSet;
     }
 
+    //Subconjuntos
+    isSubsetOf(otherSet) {
+        if (this.size() > otherSet.size()) {
+            return false;
+        }
+        let isSubset = true;
+        this.values().every(value => {
+            if (!otherSet.has(value)) {
+                isSubset = false;
+                return false;
+            }
+            return true;
+        })
+        return isSubset;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Testes 01 na Classe
@@ -137,7 +181,6 @@ const unionA_B = setA.union(setB);
 console.log(unionA_B.values());
 
 // Testes 03 na Classe
-
 
 const setC = new Set();
 setC.add(1);
