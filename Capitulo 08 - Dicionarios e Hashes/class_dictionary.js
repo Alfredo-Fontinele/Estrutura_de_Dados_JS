@@ -26,7 +26,7 @@ export default class Dictionary {
     }
 
     // Definindo uma chave e valor no dicionário, e a classe ValuePair
-    setKey(key, value) {
+    set(key, value) {
         if (key != null && value != null) {
             const tableKey = this.toStrFn(key);
             this.table[tableKey] = new ValuePair(key, valor);
@@ -70,4 +70,71 @@ export default class Dictionary {
         return valuePairs;
     }
 
+    keys() {
+        return this.keyValues().map(valuePair => valuePair.key);
+    }
+
+    // Iterandos pelos ValuePairs do dicionário com forEach
+
+    forEach(callbackFn) {
+        const valuePairs = this.keyValues();
+        for (let i = 0; i < valuePairs.length; i++) {
+            const result = callbackFn(valuePairs[i].key, valuePairs[i].value);
+            if (result === false) {
+                break;
+            }
+        }
+    }
+
+    size() {
+        return Object.keys(this.table).length;
+    }
+
+    isEmpty() {
+        return this.size() === 0;
+    }
+
+    clear() {
+        this.table = {}
+    }
+
+    toString() {
+        if (this.isEmpty()) {
+            return "";
+        }
+        const valuePairs = this.keyValues();
+        let objString = `${valuePairs[0].toString()}`;
+        for (let i = 1; i < valuePairs.length; i++) {
+            objString = `${objString},${valuePairs[i].toString()}`;
+        }
+        return objString;
+    }
+
 }
+
+// Usando a Classe Dictionary
+
+const dict = new Dictionary();
+dict.set("Gandalf", "gandalf@gmail.com");
+dict.set("Bilbo", "bilbo@gmail.com");
+dict.set("Tyrion", "tyrion@gmail.com");
+
+console.log(dict.hasKey("Gandalf"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
